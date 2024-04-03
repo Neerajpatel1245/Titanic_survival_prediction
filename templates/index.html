@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Titanic Survival Prediction</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='css/styles.css')}}">
+</head>
+
+<body>
+    <video autoplay muted loop id="background-video">
+        <source src="{{url_for('static', filename='assets/ship.mp4')}}" type="video/mp4">
+        Your browser does not support HTML5 video.
+    </video>
+    <div class="container">
+        <h1>Titanic Survival Prediction</h1>
+        <h2>Let see what are the chances of your survival if you were in Titanic</h2>
+        <div id="form-container">
+            <form id="prediction-form" method="post" action="/predict">
+                <label for="pclass">Passenger Class:</label>
+                <select id="pclass" name="pclass">
+                    <option value="1">1st Class</option>
+                    <option value="2">2nd Class</option>
+                    <option value="3">3rd Class</option>
+                </select><br>
+                <label for="Title">Title of your Name:</label>
+                <select id="Title" name="Title">
+                    <option value="1">Mr.</option>
+                    <option value="2">Miss</option>
+                    <option value="3">Mrs.</option>
+                    <option value="4">Master</option>
+                    <option value="5">None of the above</option>
+                </select><br>
+                <label for="Sex">Gender:</label>
+                <select id="Sex" name="Sex">
+                    <option value="0">Male</option>
+                    <option value="1">Female</option>
+                </select><br>
+                <label for="Age">Age Group:</label>
+                <select id="Age" name="Age">
+                    <option value="0">0-11</option>
+                    <option value="1">12-18</option>
+                    <option value="2">19-22</option>
+                    <option value="3">23-27</option>
+                    <option value="4">28-33</option>
+                    <option value="5">34-40</option>
+                    <option value="6">41-66</option>
+                    <option value="7">67-100</option>
+                </select><br>
+                <label for="SibSp">No. of Siblings and wife with you in Titanic:</label>
+                <select id="SibSp" name="SibSp">
+                    <option value="0">0</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                </select><br>
+                <label for="Parch">No. of Parents and Childrens with you in Titanic:</label>
+                <select id="Parch" name="Parch">
+                    <option value="0">0</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                </select><br>
+                <label for="Fare">Fare(in $):</label>
+                <select id="Fare" name="Fare">
+                    <option value="0">0-8</option>
+                    <option value="1">9-14</option>
+                    <option value="2">15-31</option>
+                    <option value="3">32-99</option>
+                    <option value="4">100-250</option>
+                    <option value="5">Above 250</option>
+                </select><br>
+                <label for="Deck">Cabin:</label>
+                <select id="Deck" name="Deck">
+                    <option value="1">A</option>
+                    <option value="2">B</option>
+                    <option value="3">C</option>
+                    <option value="4">D</option>
+                    <option value="5">E</option>
+                    <option value="6">F</option>
+                    <option value="7">G</option>
+                    <option value="8">U</option>
+                </select><br>
+                <label for="Embarked">Embarked From/Came from:</label>
+                <select id="Embarked" name="Embarked">
+                    <option value="0">Southampton</option>
+                    <option value="1">Cherbourg</option>
+                    <option value="2">Queenstown</option>
+                </select><br>
+                <button type="submit">Predict</button>
+            </form>
+        </div>
+    </div>
+    <div class="result-container">
+        <h1>Prediction</h1>
+        <h2>Prediction will be here</h2>
+        <div {% if not result %} style="display: none;" {% endif %}>
+            <div id="sur" {% if not var %} style="display: none;" {% endif %}>
+                {% if var %}
+                <p>Prediction: {{ result }}</p>
+                {% endif %}
+            </div >
+            <div id="nosur" {% if var %} style="display: none;" {% endif %}>
+                {% if not var %}
+                <p>Prediction: {{ result }}</p>
+                {% endif %}
+            </div>
+        </div>
+        <div id="note" {% if not result %} style="display: none;" {% endif %}>
+            {% if result %}
+            <p>NOTE:- This 92% is because that
+                our machine learning model
+                have 92.3% accuracy score </p>
+            {% endif %}
+        </div>
+    </div>
+</body>
+
+</html>
